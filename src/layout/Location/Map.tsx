@@ -121,7 +121,7 @@ const Map = () => {
         </InfoRow>
         <InfoRow>
           <InfoIcon>🅿️</InfoIcon>
-          주차안내 건물 지하 주차장 2시간 무료
+          주차안내 건물 지하 주차장 2시간 무료(안내데스크에서 주차권 수령)
         </InfoRow>
       </InfoGroup>
     </>
