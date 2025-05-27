@@ -80,3 +80,4 @@ npm run dev
 [![Star History Chart](https://api.star-history.com/svg?repos=heejin-hwang/mobile-wedding-invitation&type=Date)](https://star-history.com/#heejin-hwang/mobile-wedding-invitation&Date)
 
 >>>>>>> 00a0872 (🎉 initial commit)
+" "  
