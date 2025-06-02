@@ -1,11 +1,19 @@
+// src/firebase.ts
 import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 
-// TODO: https://firebase.google.com/docs/web/setup?hl=ko
-// 가이드에 따라 firebase config를 설정합니다.
 const firebaseConfig = {
-
+  apiKey: "AIzaSyAHgkK6JFhvkMpZALaAagHyANj6Uyfu5OI",
+  authDomain: "wedding-guestbook-24c31.firebaseapp.com",
+  databaseURL: "https://wedding-guestbook-24c31-default-rtdb.asia-southeast1.firebasedatabase.app", // ✅ 이 줄 추가!
+  projectId: "wedding-guestbook-24c31",
+  storageBucket: "wedding-guestbook-24c31.firebasestorage.app",
+  messagingSenderId: "390031327980",
+  appId: "1:390031327980:web:c8a19140e8659f3f6edbc9"
 };
 
-export const firebaseApp = initializeApp(firebaseConfig);
-export const realtimeDb = getDatabase(firebaseApp);
+
+const firebaseApp = initializeApp(firebaseConfig);
+const realtimeDb = getDatabase(firebaseApp);
+
+export { firebaseApp, realtimeDb }; // ✅ named export

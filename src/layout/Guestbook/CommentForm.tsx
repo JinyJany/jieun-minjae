@@ -1,99 +1,101 @@
-import { useState } from 'react';
-import styled from '@emotion/styled';
-// import { push, ref, serverTimestamp } from 'firebase/database';
-// import { realtimeDb } from '../../firebase.ts';
+// src/layout/Guestbook/CommentForm.tsx
+import { useEffect, useState } from 'react';
+import { onValue, push, ref } from 'firebase/database';
+import { realtimeDb } from '../../firebase'; // 경로를 '@/firebase'로 사용하려면 tsconfig에 path alias 설정 필요
 
-// TODO: 방명록 기능 사용시, realtime db에 guestbook 추가
-// const guestbookRef = ref(realtimeDb, 'guestbook');
+interface GuestbookEntry {
+  id: string;
+  sender: string;
+  message: string;
+  createdAt: number;
+  date: string;
+}
 
 const CommentForm = () => {
-  const [name, setName] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
+  const [name, setName] = useState('');
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState<GuestbookEntry[]>([]);
+
+  useEffect(() => {
+    const guestbookRef = ref(realtimeDb, 'guestbook');
+    const unsubscribe = onValue(guestbookRef, (snapshot) => {
+      const data = snapshot.val() as Record<string, Omit<GuestbookEntry, 'id'>> | null;
+      if (!data) return;
+
+      const entries: GuestbookEntry[] = Object.entries(data).map(([key, val]) => ({
+        id: key,
+        ...val,
+      }));
+
+      entries.sort((a, b) => b.createdAt - a.createdAt);
+      setMessages(entries);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (!name || !message) {
-      alert('이름과 메시지를 채워주세요. 🥹');
-    } else {
-      e.preventDefault();
-      // TODO: 이름, 메시지, 생성시간, 작성날짜 저장.
-      // const guestbookMessage = {
-      //   sender: name,
-      //   message: message,
-      //   createdAt: serverTimestamp(),
-      //   date: new Date().toLocaleString(),
-      // };
-      // void push(guestbookRef, guestbookMessage);
-      //
-      // alert('메시지를 보냈습니다. 💌');
-      setName('');
-      setMessage('');
+      alert('이름과 메시지를 입력해주세요.');
+      return;
     }
+
+    const guestbookMessage = {
+      sender: name,
+      message,
+      createdAt: Date.now(),
+      date: new Date().toLocaleString(),
+    };
+
+    const guestbookRef = ref(realtimeDb, 'guestbook');
+    void push(guestbookRef, guestbookMessage);
+    alert('메시지를 보냈습니다. 💌');
+    setName('');
+    setMessage('');
+    console.log("보낼 메시지:", guestbookMessage);
   };
 
   return (
-    <FormWrapper onSubmit={handleSubmit}>
-      <NameInput
-        placeholder="이름"
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <MessageInput
-        placeholder="메시지"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      <SubmitButton type="submit">등록</SubmitButton>
-    </FormWrapper>
+    <div style={{ padding: '1rem' }}>
+      <form onSubmit={handleSubmit}>
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="이름"
+          style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
+        />
+        <textarea
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="메시지"
+          style={{ width: '100%', height: '80px', padding: '8px' }}
+        />
+        <button type="submit" style={{ marginTop: '10px', padding: '8px 16px' }}>
+          작성하기
+        </button>
+      </form>
+
+      <ul style={{ listStyle: 'none', padding: 0, marginTop: '20px' }}>
+        {messages.map((msg) => (
+          <li
+            key={msg.id}
+            style={{
+              background: '#f9f9f9',
+              marginBottom: '12px',
+              padding: '10px',
+              borderRadius: '8px',
+            }}
+          >
+            <strong>{msg.sender}</strong>{' '}
+            <span style={{ fontSize: '0.8rem', color: '#888' }}>({msg.date})</span>
+            <p style={{ marginTop: '4px' }}>{msg.message}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
-const FormWrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  overflow: visible;
-  align-items: center;
-`;
-
-const NameInput = styled.input`
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 4px;
-  font-size: 1rem;
-  line-height: 1;
-  outline: none;
-  border: 1px solid #ccc;
-  font-family: inherit;
-  font-weight: 300;
-`;
-
-const MessageInput = styled.textarea`
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  border-radius: 4px;
-  padding: 4px;
-  font-size: 1rem;
-  line-height: 1.5;
-  outline: none;
-  border: 1px solid #ccc;
-  resize: none;
-  font-family: inherit;
-  font-weight: 300;
-`;
-
-const SubmitButton = styled.button`
-  width: 100%;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 1rem;
-  line-height: 1.5;
-  border: 1px solid lightgray;
-  background-color: white;
-  font-family: inherit;
-  font-weight: inherit;
-  color: inherit;
-`;
 export default CommentForm;
