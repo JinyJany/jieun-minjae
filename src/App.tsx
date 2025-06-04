@@ -10,6 +10,7 @@ import Invitation from '@/layout/Invitation/Invitation.tsx';
 import Location from '@/layout/Location/Location.tsx';
 import Main from '@/layout/Main/Main.tsx';
 
+
 function App() {
   const [isVisible, setIsVisible] = useState(false);
   const galleryRef = useRef<HTMLDivElement | null>(null);
@@ -43,12 +44,11 @@ function App() {
         <GalleryWrap />
       </Wrapper>
       <Wrapper>
-        <Heading1>마음 전하실 곳</Heading1>
-        <Account />
+        <Location />
       </Wrapper>
       <Wrapper>
-        <Heading1>오시는 길</Heading1>
-        <Location />
+        <Heading1>마음 전하실 곳</Heading1>
+        <Account />
       </Wrapper>
       <Wrapper>
         <Heading1>신랑 신부에게</Heading1>

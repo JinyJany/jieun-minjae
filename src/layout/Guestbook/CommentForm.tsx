@@ -70,7 +70,13 @@ const CommentForm = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="메시지"
-          style={{ width: '100%', height: '80px', padding: '8px' }}
+          style={{ 
+            width: '100%', 
+            height: '80px', 
+            padding: '8px',
+            fontFamily: 'inherit', // ✅ 이름 input과 같은 글꼴 상속
+            fontSize: '0.9rem' // ✅ 필요 시 크기도 조정
+          }}
         />
         <button type="submit" style={{ marginTop: '10px', padding: '8px 16px' }}>
           작성하기

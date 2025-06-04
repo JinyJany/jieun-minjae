@@ -1,11 +1,10 @@
 import styled from '@emotion/styled';
 
 export const Heading1 = styled.p`
-  font-family: HSSanTokki20-Regular, serif;
-  font-size: 1.5rem;
-  margin: 10px;
-  color: #e88ca6;
-  white-space: pre-line;
+  font-size: 24px;
+  font-weight: 500;
+  color: #aa9292;
+  margin-bottom: 16px;
 `;
 
 export const Heading2 = styled.p`
