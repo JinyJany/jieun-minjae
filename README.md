@@ -13,6 +13,10 @@ Kakao API, Naver Map API 등 다양한 외부 API와 연동하여 풍부한 사�
 
 ---
 
+## 🌐 배포 링크
+
+👉 [모바일 청첩장 바로가기](https://mobile-wedding-invitation-swart.vercel.app/)
+
 
 ## 🚀 주요 기능
 
