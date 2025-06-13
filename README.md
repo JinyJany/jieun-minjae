@@ -13,6 +13,7 @@ Kakao API, Naver Map API 등 다양한 외부 API와 연동하여 풍부한 사�
 
 ---
 
+
 ## 🚀 주요 기능
 
 - 📱 **모바일 최적화** : React + Vite 기반 반응형 청첩장 웹 페이지
@@ -49,6 +50,11 @@ Kakao API, Naver Map API 등 다양한 외부 API와 연동하여 풍부한 사�
 
 
 ```
+
+## 🎬 시연 데모
+
+![시연 GIF](./demo.gif)
+
 
 ## ✨ 프로젝트 회고
 
