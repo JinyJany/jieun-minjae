@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from '@emotion/styled';
 import data from 'data.json';
 import AccountCard from './AccountCard';
