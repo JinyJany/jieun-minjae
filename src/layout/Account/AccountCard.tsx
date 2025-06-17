@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import CopyIcon from '@/assets/icons/copy.svg?react';
 import kakaopay from '@/assets/icons/kakaopay.png?url';
-import React from 'react';
 
 interface IAccountProps {
   name: string;
@@ -11,11 +10,14 @@ interface IAccountProps {
   kakaopayAccount?: string;
 }
 
-const AccountItem = ({ name, relation, bank, account, kakaopayAccount }: IAccountProps) => {
-  const handleCopy = () => {
-    navigator.clipboard.writeText(account).then(() => {
+const AccountCard = ({ name, relation, bank, account, kakaopayAccount }: IAccountProps) => {
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(account);
       alert('계좌번호가 복사되었습니다.');
-    });
+    } catch (error) {
+      alert('복사에 실패했습니다.');
+    }
   };
 
   return (
@@ -25,18 +27,21 @@ const AccountItem = ({ name, relation, bank, account, kakaopayAccount }: IAccoun
         <NameText>{name} ({relation})</NameText>
       </AccountInfo>
       <ActionWrapper>
-        <IconButton onClick={handleCopy}><CopyIcon fill="#666" /></IconButton>
+        <IconButton onClick={() => void handleCopy()}>
+            <CopyIcon fill="#666" />
+        </IconButton>
         {kakaopayAccount && (
-          <KakaoButton href={kakaopayAccount} target="_blank" rel="noreferrer">
+            <KakaoButton href={kakaopayAccount} target="_blank" rel="noreferrer">
             <KakaoImg src={kakaopay} alt="kakaopay" />
-          </KakaoButton>
+            </KakaoButton>
         )}
-      </ActionWrapper>
+        </ActionWrapper>
+
     </ItemWrapper>
   );
 };
 
-export default AccountItem;
+export default AccountCard;
 
 const ItemWrapper = styled.div`
   border: 1px solid #ddd;

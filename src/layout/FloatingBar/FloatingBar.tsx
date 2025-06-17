@@ -1,50 +1,56 @@
-// import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import data from 'data.json';
-// import { increment, onValue, ref, update } from 'firebase/database';
-// import { realtimeDb } from 'firebase.ts';
 import JSConfetti from 'js-confetti';
+
 import Heart from '@/assets/icons/heart_plus.svg?react';
 import Share from '@/assets/icons/share.svg?react';
 import Upward from '@/assets/icons/upward.svg?react';
 import Button from '@/components/Button.tsx';
 
+// ✅ 카카오 window 타입 선언
+declare global {
+  interface Window {
+    Kakao: {
+      init: (key: string) => void;
+      isInitialized: () => boolean;
+      Share: {
+        sendCustom: (params: {
+          templateId: number;
+          templateArgs?: Record<string, string>;
+        }) => void;
+      };
+    };
+  }
+}
+
 const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
   const { emojis } = data;
 
-  // TODO: count 기능 사용 원할시 firebase realtime db 연결!
-  // const [count, setCount] = useState(0);
+  const jsConfetti = new JSConfetti();
 
-  // useEffect(() => {
-  // TODO: realtime db 에 likes 객체 추가.
-  //   const dbRef = ref(realtimeDb, 'likes');
-  //   onValue(dbRef, (snapshot) => {
-  //     setCount(Number(snapshot.val()));
-  //   });
-  // }, []);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(window.location.href).then(
-      () => {
-        alert('주소가 복사되었습니다.😉😉');
-      },
-      () => {
-        alert('주소 복사에 실패했습니다.🥲🥲');
-      },
-    );
-  };
+  useEffect(() => {
+    if (!window.Kakao.isInitialized()) {
+      window.Kakao.init('00d19e6740522363021e52adc3617542');  // ✅ 너의 JavaScript 키
+    }
+  }, []);
 
   const handleCount = () => {
     void jsConfetti.addConfetti({ emojis });
-
-    // 버튼 클릭시 likes 수 증가
-    // const dbRef = ref(realtimeDb);
-    // void update(dbRef, {
-    //   likes: increment(1),
-    // });
   };
 
-  const jsConfetti = new JSConfetti();
+  // ✅ 기존 handleCopy → 카카오톡 공유로 변경
+  const handleShare = () => {
+    window.Kakao.Share.sendCustom({
+      templateId: 121279,  // ✅ 너의 템플릿 ID
+      templateArgs: {
+        REGI_WEB_DOMAIN: 'https://mobile-wedding-invitation-swart.vercel.app',
+        A_N: '서일',
+        A_E: '도연',
+      },
+    });
+  };
+
   const handleScroll = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -53,9 +59,8 @@ const FloatingBar = ({ isVisible }: { isVisible: boolean }) => {
     <Nav isVisible={isVisible}>
       <Button onClick={handleCount}>
         <Heart fill="#e88ca6" />
-        {/*{count || ''}*/}
       </Button>
-      <Button onClick={handleCopy}>
+      <Button onClick={handleShare}>
         <Share fill="#e88ca6" />
         공유
       </Button>

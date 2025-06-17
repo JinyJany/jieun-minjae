@@ -37,51 +37,55 @@
   "hostInfo": [
     {
       "host": "신랑측",
+      "type": "groom",
       "accountInfo": [
         {
           "name": "박서일",
           "relation": "신랑",
           "bank": "우리은행",
           "account": "1022841237444",
-          "kakaopayAccount": "",
-          "tossAccount": ""
+          "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         },
         {
           "name": "박재우",
           "relation": "아버지",
           "bank": "농협",
-          "account": "123-45-678901"
+          "account": "123-45-678901",
+          "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         },
         {
           "name": "박수민",
           "relation": "어머니",
           "bank": "농협",
-          "account": "123-45-678901"
+          "account": "123-45-678901",
+          "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         }
       ]
     },
     {
       "host": "신부측",
+      "type": "bride",
       "accountInfo": [
         {
           "name": "김도연",
           "relation": "신부",
           "bank": "토스뱅크",
           "account": "1234-5678-9012",
-          "kakaopayAccount": "",
-          "tossAccount": ""
+          "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         },
         {
           "name": "김태훈",
           "relation": "아버지",
           "bank": "농협",
-          "account": "123-45-678901"
+          "account": "123-45-678901",
+          "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         },
         {
           "name": "정영희",
           "relation": "어머니",
           "bank": "농협",
-          "account": "123-45-678901"
+          "account": "123-45-678901",
+          "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         }
       ]
     }
