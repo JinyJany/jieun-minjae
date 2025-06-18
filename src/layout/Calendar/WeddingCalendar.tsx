@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import dayjs from 'dayjs';
 
-// 날짜 타입 명시
 interface TimeDiff {
   days: number;
   hours: number;
@@ -37,7 +36,6 @@ const WeddingCalendar = () => {
     const firstDay = weddingDate.startOf('month').day();
     const dates = [];
 
-    // 빈 칸 생성
     for (let i = 0; i < firstDay; i++) {
       dates.push(<DateCell key={`empty-${i}`} />);
     }
@@ -51,53 +49,112 @@ const WeddingCalendar = () => {
   };
 
   return (
-    <Container>
-      <Header>
-        <WeddingDate>2026.03.01</WeddingDate>
-        <WeddingTime>일요일 오후 1시 40분</WeddingTime>
-      </Header>
+    <CalendarContainer>
+      <WeddingInfo>
+        <DateText>2026.03.01</DateText>
+        <TimeText>일요일 오후 1시 40분</TimeText>
+      </WeddingInfo>
 
-      <Calendar>
-        <WeekHeader>
-          <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
-        </WeekHeader>
-        <DateGrid>
-          {renderCalendar()}
-        </DateGrid>
-      </Calendar>
+      <CalendarBox>
+        <Weekdays>
+          {['일', '월', '화', '수', '목', '금', '토'].map(day => (
+            <Weekday key={day}>{day}</Weekday>
+          ))}
+        </Weekdays>
+        <Dates>{renderCalendar()}</Dates>
+      </CalendarBox>
 
-      <Countdown>
-        <CountItem>{diff.days}일</CountItem>
-        <CountItem>{diff.hours}시간</CountItem>
-        <CountItem>{diff.minutes}분</CountItem>
-        <CountItem>{diff.seconds}초</CountItem>
-      </Countdown>
+      <CountdownBox>
+        <CountdownItem>{diff.days} DAYS</CountdownItem>
+        <CountdownItem>{diff.hours} HOUR</CountdownItem>
+        <CountdownItem>{diff.minutes} MIN</CountdownItem>
+        <CountdownItem>{diff.seconds} SEC</CountdownItem>
+      </CountdownBox>
 
-      <DDayText>서일 ❤️ 도연의 결혼식이 {diff.days}일 남았습니다.</DDayText>
-    </Container>
+      <FooterText>서일 ❤️ 도연의 결혼식이 <RedText>{diff.days}</RedText>일 남았습니다.</FooterText>
+    </CalendarContainer>
   );
 };
 
 export default WeddingCalendar;
 
-
-// styled-components
-const Container = styled.div`text-align: center;padding: 20px;`;
-const Header = styled.div`margin-bottom: 20px;`;
-const WeddingDate = styled.h2`font-size: 24px; font-weight: bold;`;
-const WeddingTime = styled.p`color: #777;`;
-
-const Calendar = styled.div`margin: 20px auto; width: 280px;`;
-const WeekHeader = styled.div`display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 10px;`;
-const DateGrid = styled.div`display: flex; flex-wrap: wrap; gap: 8px;`;
-
-const DateCell = styled.div<{ active?: boolean }>`
-  width: 30px; height: 30px; line-height: 30px; border-radius: 50%;
-  background: ${({ active }) => (active ? '#eee' : 'transparent')};
-  color: ${({ active }) => (active ? '#555' : '#333')};
+const CalendarContainer = styled.div`
   text-align: center;
+  padding: 20px;
+  font-family: 'Noto Serif KR', serif;
 `;
 
-const Countdown = styled.div`display: flex; justify-content: center; gap: 10px; margin: 20px 0;`;
-const CountItem = styled.div`background: #fafafa; padding: 10px; border-radius: 10px; font-weight: bold; min-width: 60px;`;
-const DDayText = styled.p`color: #777; margin-top: 10px;`;
+const WeddingInfo = styled.div`
+  margin-bottom: 20px;
+`;
+
+const RedText = styled.span`
+  color: #e63946; /* 고급스러운 레드톤 */
+  font-weight: bold;
+`;
+
+const DateText = styled.h2`
+  font-size: 22px;
+  font-weight: bold;
+`;
+
+const TimeText = styled.p`
+  color: #666;
+  font-size: 16px;
+`;
+
+const CalendarBox = styled.div`
+  width: 280px;
+  margin: 0 auto 20px;
+`;
+
+const Weekdays = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+const Weekday = styled.div`
+  text-align: center;
+  color: #aaa;
+`;
+
+const Dates = styled.div`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+`;
+
+const DateCell = styled.div<{ active?: boolean }>`
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 50%;
+  background: ${({ active }) => (active ? '#f0f0f0' : 'transparent')};
+  color: ${({ active }) => (active ? '#d35400' : '#555')};
+  text-align: center;
+  font-weight: ${({ active }) => (active ? 'bold' : 'normal')};
+`;
+
+const CountdownBox = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+`;
+
+const CountdownItem = styled.div`
+  background: #fff5f5;
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 60px;
+  font-weight: bold;
+`;
+
+const FooterText = styled.p`
+  color: #333;
+  font-size: 14px;
+  margin-top: 10px;
+`;
+
