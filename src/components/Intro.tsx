@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import introImage from '@/assets/images/intro.jpg'; // 이미지 경로를 본인 프로젝트에 맞게 수정하세요
+import introImage from '@/assets/images/intro.jpg'; // 이미지 경로 맞게 수정하세요
 
 const Intro = () => {
   const [visible, setVisible] = useState(true);
@@ -20,7 +20,6 @@ const Intro = () => {
 export default Intro;
 
 
-// ✅ styled-components
 const IntroWrapper = styled.div<{ visible: boolean }>`
   position: fixed;
   top: 0;
@@ -38,15 +37,15 @@ const IntroWrapper = styled.div<{ visible: boolean }>`
   pointer-events: ${({ visible }) => (visible ? 'auto' : 'none')};
   transition: opacity 1s ease-in-out;
 
-  /* PC에서는 보이지 않음 */
+  /* ✅ PC에서 숨김 */
   @media screen and (min-width: 500px) {
     display: none;
   }
 `;
 
 const IntroImage = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* 비율 유지 + 여백 흰색으로 */
-  background-color: white;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;         // 화면 비율에 맞춰 이미지 꽉 채움 (비율 무시)
+  background-color: white;   // 여백이 있을 경우 흰색으로 채움
 `;
