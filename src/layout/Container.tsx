@@ -1,30 +1,16 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div`
-  border: 30px solid transparent;
-  border-image-source: url('/background.png');
-  border-image-slice: 30% 49%;
-  border-image-width: 280px;
+  border: 30px solid transparent; /* 테두리의 초기 값 설정 */
+  border-image-source: url('/background.png'); /* 이미지 경로 설정 */
+  border-image-slice: 30% 49%; /* 이미지의 크기 설정 */
+  border-image-width: 280px; /* 테두리 이미지의 너비 설정 */
   background-color: #ffffff;
-
   width: 85vw;
   margin: 0 auto;
-
-  /* ✅ 모바일 화면 높이 100% 사용 */
-  min-height: 100dvh;
-
-  /* ✅ 가로 스크롤 방지 */
-  overflow-x: hidden;
-
-  /* ✅ 폰트와 중앙 정렬 */
-  font-family: 'Noto Serif KR', serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
+  
   @media screen and (min-width: 500px) {
-    width: 500px;
+      width: 500px;
   }
 `;
-
 export default Container;
