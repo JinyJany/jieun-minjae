@@ -18,8 +18,6 @@ const Intro = () => {
 };
 
 export default Intro;
-
-
 const IntroWrapper = styled.div<{ visible: boolean }>`
   position: fixed;
   top: 0;
@@ -44,8 +42,10 @@ const IntroWrapper = styled.div<{ visible: boolean }>`
 `;
 
 const IntroImage = styled.img`
+  max-width: 100vw;
+  max-height: 100vh;
   width: 100vw;
   height: 100vh;
-  object-fit: cover;         // 화면 비율에 맞춰 이미지 꽉 채움 (비율 무시)
-  background-color: white;   // 여백이 있을 경우 흰색으로 채움
+  object-fit: contain; // 📌 비율 무시하고 화면에 꽉 맞춤 + 넘치지 않음
+  background-color: white;
 `;
