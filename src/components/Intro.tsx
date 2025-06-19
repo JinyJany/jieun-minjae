@@ -18,6 +18,8 @@ const Intro = () => {
 };
 
 export default Intro;
+
+
 const IntroWrapper = styled.div<{ visible: boolean }>`
   position: fixed;
   top: 0;
