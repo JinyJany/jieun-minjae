@@ -51,6 +51,7 @@ const Container = styled.div`
   width: 100%;
   margin: 20px auto;  // 기존 margin: 50px → 20px으로 변경
   padding: 10px;
+  font-family: 'Noto Serif KR', serif;
 `;
 
 const Section = styled.div`

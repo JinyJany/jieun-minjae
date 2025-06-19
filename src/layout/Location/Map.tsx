@@ -5,6 +5,7 @@ const MapWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  font-family: 'Noto Serif KR', serif;
 `;
 
 const StyledMap = styled.div`
@@ -67,6 +68,7 @@ const AddressText = styled.div`
   color: #777;
   line-height: 1.6;
   margin-bottom: 20px;
+  font-family: 'Noto Serif KR', serif;
 `;
 
 
@@ -92,6 +94,7 @@ const IconImage = styled.img`
 
 const InfoDetails = styled.div`
   text-align: left;          // ✅ 문구 왼쪽 정렬
+  font-family: 'Noto Serif KR', serif;
 `;
 
 const InfoTitle = styled.div`
@@ -99,6 +102,7 @@ const InfoTitle = styled.div`
   color: #888;
   margin-bottom: 4px;
   text-align: left;          // ✅ 왼쪽 정렬
+  font-family: 'Noto Serif KR', serif;
 `;
 
 const InfoText = styled.div`
@@ -106,6 +110,7 @@ const InfoText = styled.div`
   color: #444;
   line-height: 1.6;
   text-align: left;          // ✅ 왼쪽 정렬
+  font-family: 'Noto Serif KR', serif;
 `;
 
 

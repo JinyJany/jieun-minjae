@@ -22,4 +22,5 @@ const GuestBookWrapper = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-bottom: 50px;
+  font-family: 'Noto Serif KR', serif;
 `;

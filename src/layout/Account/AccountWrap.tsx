@@ -70,6 +70,7 @@ const Wrapper = styled.div`
   }
   display: flex;
   flex-direction: column;
+  font-family: 'Noto Serif KR', serif;
 `;
 
 const Info = styled.div`

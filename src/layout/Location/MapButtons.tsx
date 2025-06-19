@@ -20,4 +20,5 @@ const MapButtonWrapper = styled.div`
   display: flex;
   gap: 8px;
   justify-content: center;
+  font-family: 'Noto Serif KR', serif;
 `;

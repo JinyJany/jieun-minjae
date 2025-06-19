@@ -65,19 +65,20 @@ const WeddingCalendar = () => {
       </CalendarBox>
 
       <CountdownBox>
-        <CountdownItem>{diff.days} DAYS</CountdownItem>
-        <CountdownItem>{diff.hours} HOUR</CountdownItem>
-        <CountdownItem>{diff.minutes} MIN</CountdownItem>
-        <CountdownItem>{diff.seconds} SEC</CountdownItem>
+        <CountItem data-label="DAYS">{diff.days}</CountItem>
+        <CountItem data-label="HOUR">{diff.hours}</CountItem>
+        <CountItem data-label="MIN">{diff.minutes}</CountItem>
+        <CountItem data-label="SEC">{diff.seconds}</CountItem>
       </CountdownBox>
 
-      <FooterText>서일 ❤️ 도연의 결혼식이 <RedText>{diff.days}</RedText>일 남았습니다.</FooterText>
+      <FooterText>
+        서일 ❤️ 도연의 결혼식이 <RedText>{diff.days}</RedText>일 남았습니다.
+      </FooterText>
     </CalendarContainer>
   );
 };
 
 export default WeddingCalendar;
-
 const CalendarContainer = styled.div`
   text-align: center;
   padding: 20px;
@@ -88,13 +89,8 @@ const WeddingInfo = styled.div`
   margin-bottom: 20px;
 `;
 
-const RedText = styled.span`
-  color: #e63946; /* 고급스러운 레드톤 */
-  font-weight: bold;
-`;
-
 const DateText = styled.h2`
-  font-size: 22px;
+  font-size: 24px;
   font-weight: bold;
 `;
 
@@ -140,21 +136,46 @@ const DateCell = styled.div<{ active?: boolean }>`
 const CountdownBox = styled.div`
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
+  gap: 12px;
+  margin: 28px 0 16px;
+  flex-wrap: nowrap; /* ✅ 줄바꿈 방지 */
+  overflow-x: auto;  /* ✅ 혹시 너무 좁으면 스크롤 생기게 */
 `;
 
-const CountdownItem = styled.div`
-  background: #fff5f5;
+const CountItem = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  background: #fff4f4;
   padding: 10px;
-  border-radius: 8px;
-  min-width: 60px;
-  font-weight: bold;
+  border-radius: 10px;
+  min-width: 55px; /* ✅ 기존 70px → 55px */
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #1a1a1a;
+  text-transform: uppercase;
+
+  &::before {
+    content: attr(data-label);
+    font-size: 10px;
+    margin-bottom: 4px;
+    color: #888;
+  }
 `;
+
 
 const FooterText = styled.p`
   color: #333;
   font-size: 14px;
   margin-top: 10px;
 `;
+
+const RedText = styled.span`
+  color: #e63946;
+  font-weight: bold;
+`;
+
+
 

@@ -20,6 +20,7 @@ export default Invitation;
 const InvitationWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  font-family: 'Noto Serif KR', serif;
   align-items: center;
   gap: 20px;
 `;

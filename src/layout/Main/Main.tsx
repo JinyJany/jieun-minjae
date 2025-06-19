@@ -85,4 +85,5 @@ const SubTitle = styled.p`
   color: #2F2120;
   line-height: 140%;
   white-space: pre-line;
+  font-family: 'Noto Serif KR', serif;
 `;
