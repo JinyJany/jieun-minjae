@@ -4,13 +4,12 @@ import kakaopay from '@/assets/icons/kakaopay.png?url';
 
 interface IAccountProps {
   name: string;
-  relation: string;
   bank: string;
   account: string;
   kakaopayAccount?: string;
 }
 
-const AccountCard = ({ name, relation, bank, account, kakaopayAccount }: IAccountProps) => {
+const AccountCard = ({ name, bank, account, kakaopayAccount }: IAccountProps) => {
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(account);
@@ -21,73 +20,86 @@ const AccountCard = ({ name, relation, bank, account, kakaopayAccount }: IAccoun
   };
 
   return (
-    <ItemWrapper>
-      <AccountInfo>
-        <BankText>{bank} {account}</BankText>
-        <NameText>{name} ({relation})</NameText>
-      </AccountInfo>
-      <ActionWrapper>
-        <IconButton onClick={() => void handleCopy()}>
-            <CopyIcon fill="#666" />
-        </IconButton>
-        {kakaopayAccount && (
-            <KakaoButton href={kakaopayAccount} target="_blank" rel="noreferrer">
-            <KakaoImg src={kakaopay} alt="kakaopay" />
-            </KakaoButton>
-        )}
-        </ActionWrapper>
+    <Card>
+      <TextInfo>
+        <NameLine>{name} ({bank})</NameLine>
+        <AccountLine>{account}</AccountLine>
+      </TextInfo>
 
-    </ItemWrapper>
+      <Actions>
+        <CopyBtn onClick={() => void handleCopy()}>
+          <CopyIcon width={18} height={18} />
+          복사
+        </CopyBtn>
+
+        {kakaopayAccount && (
+          <KakaoLink href={kakaopayAccount} target="_blank" rel="noreferrer">
+            <KakaoImg src={kakaopay} alt="kakaopay" />
+          </KakaoLink>
+        )}
+      </Actions>
+    </Card>
   );
 };
 
 export default AccountCard;
 
-const ItemWrapper = styled.div`
+// --- styles ---
+
+const Card = styled.div`
   border: 1px solid #ddd;
-  padding: 15px;
   border-radius: 10px;
+  padding: 15px;
   margin-bottom: 15px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-const AccountInfo = styled.div`
+const TextInfo = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
-`;
-
-const BankText = styled.div`
-  font-weight: bold;
-`;
-
-const NameText = styled.div`
+  gap: 4px;
   font-size: 14px;
-  color: #555;
 `;
 
-const ActionWrapper = styled.div`
+const NameLine = styled.div`
+  font-weight: 600;
+  color: #333;
+`;
+
+const AccountLine = styled.div`
+  font-size: 14px;
+  color: #111;
+  word-break: break-all;
+`;
+
+const Actions = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 `;
 
-const IconButton = styled.button`
-  background: #eee;
-  padding: 5px 10px;
-  border-radius: 5px;
+const CopyBtn = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f2f2f2;
   border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
   cursor: pointer;
+  font-size: 13px;
 `;
 
-const KakaoButton = styled.a`
+const KakaoLink = styled.a`
   background: #ffe812;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border-radius: 5px;
 `;
 
 const KakaoImg = styled.img`
-  width: 40px;
+  height: 16px;
 `;

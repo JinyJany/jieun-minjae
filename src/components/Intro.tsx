@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import introImage from '@/assets/images/intro.jpg'; // 이미지 경로 맞게 수정하세요
+import introImage from '@/assets/images/intro.jpg';
 
 const Intro = () => {
-  const [visible, setVisible] = useState(true);
+  const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(false), 2500);
+    const timer = setTimeout(() => setShow(false), 3000); // ⏱ 더 길게 유지
     return () => clearTimeout(timer);
   }, []);
 
+  if (!show) return null;
+
   return (
-    <IntroWrapper visible={visible}>
+    <IntroWrapper>
       <IntroImage src={introImage} alt="intro" />
     </IntroWrapper>
   );
@@ -20,7 +22,7 @@ const Intro = () => {
 export default Intro;
 
 
-const IntroWrapper = styled.div<{ visible: boolean }>`
+const IntroWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -33,21 +35,35 @@ const IntroWrapper = styled.div<{ visible: boolean }>`
   align-items: center;
   justify-content: center;
 
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  pointer-events: ${({ visible }) => (visible ? 'auto' : 'none')};
-  transition: opacity 1s ease-in-out;
+  animation: fadeZoomInOut 3s ease-in-out forwards;
 
-  /* ✅ PC에서 숨김 */
   @media screen and (min-width: 500px) {
     display: none;
   }
-`;
+  @keyframes fadeZoomInOut {
+      0% {
+        opacity: 0;
+        transform: scale(1.05);
+      }
+      20% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      85% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0.98);
+      }
+    }
+  `;
+
 
 const IntroImage = styled.img`
-  max-width: 100vw;
-  max-height: 100vh;
   width: 100vw;
   height: 100vh;
-  object-fit: contain; // 📌 비율 무시하고 화면에 꽉 맞춤 + 넘치지 않음
+  object-fit: contain;
   background-color: white;
 `;
