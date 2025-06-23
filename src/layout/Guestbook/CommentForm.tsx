@@ -1,7 +1,7 @@
-// src/layout/Guestbook/CommentForm.tsx
 import { useEffect, useState } from 'react';
 import { onValue, push, ref } from 'firebase/database';
-import { realtimeDb } from '../../firebase'; // 경로를 '@/firebase'로 사용하려면 tsconfig에 path alias 설정 필요
+import { realtimeDb } from '../../firebase';
+import styled from '@emotion/styled';
 
 interface GuestbookEntry {
   id: string;
@@ -15,6 +15,8 @@ const CommentForm = () => {
   const [name, setName] = useState('');
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<GuestbookEntry[]>([]);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const guestbookRef = ref(realtimeDb, 'guestbook');
@@ -46,7 +48,7 @@ const CommentForm = () => {
       sender: name,
       message,
       createdAt: Date.now(),
-      date: new Date().toLocaleString(),
+      date: new Date().toLocaleDateString(),
     };
 
     const guestbookRef = ref(realtimeDb, 'guestbook');
@@ -54,54 +56,114 @@ const CommentForm = () => {
     alert('메시지를 보냈습니다. 💌');
     setName('');
     setMessage('');
-    console.log("보낼 메시지:", guestbookMessage);
+    setShowForm(false);
   };
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <form onSubmit={handleSubmit}>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="이름"
-          style={{ width: '100%', marginBottom: '10px', padding: '8px' }}
-        />
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="메시지"
-          style={{ 
-            width: '100%', 
-            height: '80px', 
-            padding: '8px',
-            fontFamily: 'inherit', // ✅ 이름 input과 같은 글꼴 상속
-            fontSize: '0.9rem' // ✅ 필요 시 크기도 조정
-          }}
-        />
-        <button type="submit" style={{ marginTop: '10px', padding: '8px 16px' }}>
-          작성하기
-        </button>
-      </form>
+    <Wrapper>
+      {messages.slice(0, visibleCount).map((msg) => (
+        <MessageBox key={msg.id}>
+          <Sender>{msg.sender}</Sender>
+          <Content>{msg.message}</Content>
+        </MessageBox>
+      ))}
 
-      <ul style={{ listStyle: 'none', padding: 0, marginTop: '20px' }}>
-        {messages.map((msg) => (
-          <li
-            key={msg.id}
-            style={{
-              background: '#f9f9f9',
-              marginBottom: '12px',
-              padding: '10px',
-              borderRadius: '8px',
-            }}
-          >
-            <strong>{msg.sender}</strong>{' '}
-            <span style={{ fontSize: '0.8rem', color: '#888' }}>({msg.date})</span>
-            <p style={{ marginTop: '4px' }}>{msg.message}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {visibleCount < messages.length && (
+        <MoreButton onClick={() => setVisibleCount((prev) => prev + 4)}>
+          더보기
+        </MoreButton>
+      )}
+
+      {!showForm && (
+        <WriteButton onClick={() => setShowForm(true)}>작성하기</WriteButton>
+      )}
+
+      {showForm && (
+        <Form onSubmit={handleSubmit}>
+          <Input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="이름"
+          />
+          <Textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="메시지"
+          />
+          <Submit type="submit">보내기</Submit>
+        </Form>
+      )}
+    </Wrapper>
   );
 };
 
 export default CommentForm;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const MessageBox = styled.div`
+  background: #fafafa;
+  padding: 12px;
+  border-radius: 10px;
+  font-family: 'SUITE-Regular';
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+`;
+
+const Sender = styled.div`
+  font-weight: bold;
+  margin-bottom: 6px;
+`;
+
+const Content = styled.div`
+  font-size: 15px;
+`;
+
+const MoreButton = styled.button`
+  align-self: center;
+  padding: 8px 16px;
+  background: #eee;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+`;
+
+const WriteButton = styled(MoreButton)`
+  background: #c5a9a0;
+  color: white;
+  font-weight: bold;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const Input = styled.input`
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+`;
+
+const Textarea = styled.textarea`
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: none;
+  height: 80px;
+  font-family: inherit;
+`;
+
+const Submit = styled.button`
+  padding: 10px;
+  background: #a47660;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+`;
