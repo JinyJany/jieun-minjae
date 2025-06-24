@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { onValue, ref } from 'firebase/database';
-import { realtimeDb } from '@/firebase';
+import { realtimeDb } from '../../firebase';
 
 interface RsvpEntry {
   type: string;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState } from 'react';
 import styled from '@emotion/styled';
 import { push, ref } from 'firebase/database';
 import { realtimeDb } from '../../firebase';
