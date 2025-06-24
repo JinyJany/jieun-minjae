@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import Intro from '@/components/Intro.tsx';
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
 import Account from '@/layout/Account/Account.tsx';
-import RsvpSection from '@/layout/Attend/AttendForm.tsx';
+import AttendForm from '@/layout/Attend/AttendForm.tsx';
 import WeddingCalendar from '@/layout/Calendar/WeddingCalendar.tsx';
 import Container from '@/layout/Container.tsx';
 import FloatingBar from '@/layout/FloatingBar/FloatingBar.tsx';
@@ -15,8 +14,6 @@ import Main from '@/layout/Main/Main.tsx';
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
-  const [showRsvp, setShowRsvp] = useState(false);
   const galleryRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -29,21 +26,12 @@ function App() {
     };
 
     window.addEventListener('scroll', checkScrollPosition);
-    return () => {
-      window.removeEventListener('scroll', checkScrollPosition);
-    };
+    return () => window.removeEventListener('scroll', checkScrollPosition);
   }, []);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowIntro(false);
-    }, 4000);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <>
-      {showIntro && <Intro />}
       <Container>
         <Wrapper>
           <Main />
@@ -62,14 +50,12 @@ function App() {
         <Wrapper>
           <Location />
         </Wrapper>
-     <Wrapper>
-        <Heading1>참석 의사 전달</Heading1>
-        {showRsvp ? (
-          <RsvpSection onClose={() => setShowRsvp(false)} />
-        ) : (
-          <button onClick={() => setShowRsvp(true)}>참석 작성</button>
-        )}
-      </Wrapper>
+
+        {/* ✅ RSVP Section */}
+        <Wrapper>
+          <Heading1>참석 의사 전달</Heading1>
+          <AttendForm />
+        </Wrapper>
 
         <Wrapper>
           <Heading1>마음 전하실 곳</Heading1>

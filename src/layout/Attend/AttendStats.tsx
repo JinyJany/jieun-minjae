@@ -3,40 +3,60 @@ import styled from '@emotion/styled';
 import { onValue, ref } from 'firebase/database';
 import { realtimeDb } from '../../firebase';
 
-interface RsvpEntry {
-  type: string;
+interface RsvpData {
+  type: '신랑 측' | '신부 측';
   name: string;
   count: number;
-  meal: string;
+  companion: string;
+  meal: '예정' | '안함' | '미정';
   timestamp: number;
 }
 
 const AttendStats = () => {
-  const [data, setData] = useState<RsvpEntry[]>([]);
+  const [mealStats, setMealStats] = useState({ 예정: 0, 안함: 0, 미정: 0 });
+  const [sideStats, setSideStats] = useState({ '신랑 측': 0, '신부 측': 0 });
 
   useEffect(() => {
     const rsvpRef = ref(realtimeDb, 'rsvp');
-    onValue(rsvpRef, (snapshot) => {
-      const raw = snapshot.val() as Record<string, RsvpEntry> | null;
-      if (!raw) return;
+    const unsubscribe = onValue(rsvpRef, (snapshot) => {
+      const value = snapshot.val() as Record<string, RsvpData> | null;
 
-      const entries = Object.values(raw);
-      setData(entries);
+      if (value) {
+        const mealCount = { 예정: 0, 안함: 0, 미정: 0 };
+        const sideCount = { '신랑 측': 0, '신부 측': 0 };
+
+        Object.values(value).forEach((entry) => {
+          const { meal, count, type } = entry;
+
+          if (meal in mealCount) {
+            mealCount[meal] += count;
+          }
+          if (type in sideCount) {
+            sideCount[type] += count;
+          }
+        });
+
+        setMealStats(mealCount);
+        setSideStats(sideCount);
+      }
     });
-  }, []);
 
-  const groomCount = data.filter((d) => d.type === '신랑 측').reduce((sum, d) => sum + d.count, 0);
-  const brideCount = data.filter((d) => d.type === '신부 측').reduce((sum, d) => sum + d.count, 0);
-  const mealYes = data.filter((d) => d.meal === '식사 예정').length;
-  const mealNo = data.filter((d) => d.meal === '식사 안함').length;
+    return () => unsubscribe();
+  }, []);
 
   return (
     <StatsWrap>
-      <StatItem>신랑 측 참석: {groomCount}명</StatItem>
-      <StatItem>신부 측 참석: {brideCount}명</StatItem>
-      <StatItem>식사 예정: {mealYes}명</StatItem>
-      <StatItem>식사 안함: {mealNo}명</StatItem>
-      <StatItem>총 응답자 수: {data.length}명</StatItem>
+      <StatBlock>
+        <h3> 식사 여부</h3>
+        <p>예정: {mealStats.예정}명</p>
+        <p>안함: {mealStats.안함}명</p>
+        <p>미정: {mealStats.미정}명</p>
+      </StatBlock>
+      <StatBlock>
+        <h3> 참석 구분</h3>
+        <p>신랑 측: {sideStats['신랑 측']}명</p>
+        <p>신부 측: {sideStats['신부 측']}명</p>
+      </StatBlock>
     </StatsWrap>
   );
 };
@@ -44,16 +64,29 @@ const AttendStats = () => {
 export default AttendStats;
 
 const StatsWrap = styled.div`
-  padding: 16px;
-  background: #f0f0f0;
+  margin-top: 32px;
+  padding: 24px;
   border-radius: 12px;
-  margin: 20px auto;
-  max-width: 400px;
+  background:rgb(255, 255, 255);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 `;
 
-const StatItem = styled.div`
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #333;
+const StatBlock = styled.div`
+  margin-bottom: 16px;
+
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    
+  }
+
+  p {
+    margin: 2px 0;
+    font-size: 0.95rem;
+    font-family: 'SUITE-Regular', 'Noto Serif KR', serif;
+    
+  }
 `;
