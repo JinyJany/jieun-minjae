@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+//import Intro from '@/components/Intro.tsx';
 import { Heading1 } from '@/components/Text.tsx';
 import Wrapper from '@/components/Wrapper.tsx';
 import Account from '@/layout/Account/Account.tsx';
@@ -28,6 +29,7 @@ function App() {
     window.addEventListener('scroll', checkScrollPosition);
     return () => window.removeEventListener('scroll', checkScrollPosition);
   }, []);
+
 
 
   return (
