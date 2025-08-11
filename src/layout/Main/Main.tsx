@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import data from 'data.json';
-import mainImg from '@/assets/images/05.jpg';
+import mainImg from '@/assets/images/thumbnail.jpg';
 
 const Main = () => {
   const { greeting } = data;
@@ -10,7 +10,7 @@ const Main = () => {
       <TopText>
         <TopLine>THE WEDDING OF</TopLine>
        <NameLine>
-        박서일  <And>  그리고  </And>  김도연
+        이민재  <And>  그리고  </And>  김지은
       </NameLine>
       </TopText>
 

@@ -10,7 +10,7 @@ interface TimeDiff {
 }
 
 const WeddingCalendar = () => {
-  const weddingDate = dayjs('2026-03-01T13:40:00');
+  const weddingDate = dayjs('2025-12-13T12:40:00');
 
   const calculateDiff = useCallback((): TimeDiff => {
     const now = dayjs();
@@ -51,8 +51,8 @@ const WeddingCalendar = () => {
   return (
     <CalendarContainer>
       <WeddingInfo>
-        <DateText>2026.03.01</DateText>
-        <TimeText>일요일 오후 1시 40분</TimeText>
+        <DateText>2025.12.13</DateText>
+        <TimeText>토요일 낮 12시 40분</TimeText>
       </WeddingInfo>
 
       <CalendarBox>
@@ -68,11 +68,11 @@ const WeddingCalendar = () => {
         <CountItem data-label="DAYS">{diff.days}</CountItem>
         <CountItem data-label="HOUR">{diff.hours}</CountItem>
         <CountItem data-label="MIN">{diff.minutes}</CountItem>
-        <CountItem data-label="SEC">{diff.seconds}</CountItem>
+        {/* <CountItem data-label="SEC">{diff.seconds}</CountItem> */}
       </CountdownBox>
 
       <FooterText>
-        서일 ❤️ 도연의 결혼식이 <RedText>{diff.days}</RedText>일 남았습니다.
+        민재 ❤️ 지은의 결혼식이 <RedText>{diff.days}</RedText>일 남았습니다.
       </FooterText>
     </CalendarContainer>
   );

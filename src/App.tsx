@@ -54,20 +54,20 @@ function App() {
         </Wrapper>
 
         {/* ✅ RSVP Section */}
-        <Wrapper>
+        {/* <Wrapper>
           <Heading1>참석 의사 전달</Heading1>
           <AttendForm />
-        </Wrapper>
+        </Wrapper> */}
 
         <Wrapper>
           <Heading1>마음 전하실 곳</Heading1>
           <Account />
         </Wrapper>
 
-        <Wrapper>
+        {/* <Wrapper>
           <Heading1>신랑 신부에게</Heading1>
           <Guestbook />
-        </Wrapper>
+        </Wrapper> */}
 
         <FloatingBar isVisible={isVisible} />
       </Container>

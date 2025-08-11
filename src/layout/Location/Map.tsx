@@ -141,10 +141,10 @@ const Map = () => {
       <LocationWrapper>
       <LocationLabel>LOCATION</LocationLabel>
       <LocationTitle>오시는 길</LocationTitle>
-      <PlaceName>더파티움 평촌 7층</PlaceName>
+      <PlaceName>리베라컨벤션 아르덴하우스 (10층)</PlaceName>
       <AddressText>
-       경기 안양시 동안구 시민대로 311 금강스마트빌딩 7층 (14055) <br />
-        0507-1356-2573
+       경남 창원시 성산구 중앙대로 100번길 9 (상남동 78-4) <br />
+        055-282-2600
       </AddressText>
     </LocationWrapper>
 
@@ -156,13 +156,27 @@ const Map = () => {
         <LinkButton href="https://map.naver.com/p/entry/place/38716476" target="_blank">네이버 지도</LinkButton>
         <LinkButton href="https://place.map.kakao.com/138147430" target="_blank">카카오맵</LinkButton>
       </ButtonGroup>
-
       <InfoGroup>
+        <InfoSection>
+          <IconImage src="/icons/subway.png" alt="버스 아이콘" />
+          <InfoDetails>
+            <InfoTitle>고속버스</InfoTitle>
+            <InfoText>서울고속터미널(강남) = 창원종합버스터미널</InfoText>
+            <InfoText>소요시간: 4시간 10분</InfoText>
+          </InfoDetails>
+        </InfoSection>
+
         <InfoSection>
           <IconImage src="/icons/subway.png" alt="지하철 아이콘" />
           <InfoDetails>
-            <InfoTitle>지하철</InfoTitle>
-            <InfoText>[4호선] 평촌역 3번 출구 도보 약 5분</InfoText>
+            <InfoTitle>KTX</InfoTitle>
+            <InfoText>서울역 = 창원역/창원중앙역 (소요시간: 약 3시간)</InfoText>
+            <InfoText>창원역 = 리베라컨벤션</InfoText>
+            <InfoText>택시: 약 9.2km(약 15분)</InfoText>
+            <InfoText>버스: 6000, 5000, 710, 115, 113</InfoText>
+            <InfoText>창원중앙역 = 리베라컨벤션</InfoText>
+            <InfoText>택시: 약 3.2km(약 7분)</InfoText>
+            <InfoText>버스: 3004, 3000, 215, 156</InfoText>
           </InfoDetails>
         </InfoSection>
 
@@ -171,8 +185,7 @@ const Map = () => {
           <InfoDetails>
             <InfoTitle>자가용</InfoTitle>
             <InfoText>
-              주차안내 건물 지하 주차장 2시간 무료<br />
-              안내데스크에서 주차권 수령
+              본관건물 2시간 무료 / 외부지정주차장 1시간 무료<br />
             </InfoText>
           </InfoDetails>
         </InfoSection>

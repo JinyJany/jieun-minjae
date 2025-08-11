@@ -1,38 +1,38 @@
 {
   "greeting": {
-    "title": "박서일 \uD83D\uDC8D 김도연\nWe're getting married!",
+    "title": "이민재 \uD83D\uDC8D 김지은\nWe're getting married!",
     "message": "저희 결혼합니다.\n\n서로에게 알맞은 온도로 따뜻하던 우리.\n부부로서 첫걸음을 내딛는 그 설렘의 순간에\n소중한 분들을 초대합니다.",
     "host": {
       "groom": {
-        "name": "박서일",
+        "name": "이민재",
         "relation": "아들",
         "parents": [
           {
             "relation": "아버지",
-            "name": "박재우"
+            "name": "이영조"
           },
           {
             "relation": "어머니",
-            "name": "박수민"
+            "name": "안태순"
           }
         ]
       },
       "bride": {
-        "name": "김도연",
+        "name": "김지은",
         "relation": "딸",
         "parents": [
           {
             "relation": "아버지",
-            "name": "김태훈"
+            "name": "김덕삼"
           },
           {
             "relation": "어머니",
-            "name": "정영희"
+            "name": "신영자"
           }
         ]
       }
     },
-    "eventDetail": "2026년 3월 1일 (일) 13:40\n더 파타움 평촌 레포레홀"
+    "eventDetail": "2025년 12월 13일 (토) 12:40\n리베라컨벤션 아르덴하우스(10층)"
   },
   "hostInfo": [
     {
@@ -40,21 +40,21 @@
       "type": "groom",
       "accountInfo": [
         {
-          "name": "박서일",
+          "name": "이민재",
           "relation": "신랑",
           "bank": "우리은행",
           "account": "1022841237444",
           "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         },
         {
-          "name": "박재우",
+          "name": "이영조",
           "relation": "아버지",
           "bank": "농협",
           "account": "123-45-678901",
           "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         },
         {
-          "name": "박수민",
+          "name": "안태순",
           "relation": "어머니",
           "bank": "농협",
           "account": "123-45-678901",
@@ -67,21 +67,21 @@
       "type": "bride",
       "accountInfo": [
         {
-          "name": "김도연",
+          "name": "김지은",
           "relation": "신부",
           "bank": "토스뱅크",
           "account": "1234-5678-9012",
           "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         },
         {
-          "name": "김태훈",
+          "name": "김덕삼",
           "relation": "아버지",
           "bank": "농협",
           "account": "123-45-678901",
           "kakaopayAccount": "https://qr.kakaopay.com/Ej8jbhBPQ"
         },
         {
-          "name": "정영희",
+          "name": "신영자",
           "relation": "어머니",
           "bank": "농협",
           "account": "123-45-678901",
@@ -91,8 +91,8 @@
     }
   ],
   "mapInfo": {
-    "address1": "아펠가모 공덕 라로브홀",
-    "address2": "서울 마포구 마포대로 92\n효성해링턴스퀘어 B동 7층\n02-2197-0230",
+    "address1": "리베라컨벤션",
+    "address2": "경남 창원시 성산구 중앙대로 100번길 9 (상남동 78-4)\n055-282-2600",
     "naverMap": "https://map.naver.com/p/directions/-/14132311.1099497,4514956.9078363,%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95,1929913788,PLACE_POI/-/transit?c=15.00,0,0,0,dh",
     "kakaoMap": "https://map.kakao.com/?map_type=TYPE_MAP&target=car&rt=,,489503,1123003&rt1=&rt2=%EC%95%84%ED%8E%A0%EA%B0%80%EB%AA%A8%20%EA%B3%B5%EB%8D%95%EC%A0%90&rtIds=,630786038",
     "lat": 37.54222,
