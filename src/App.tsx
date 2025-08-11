@@ -39,15 +39,15 @@ function App() {
           <Main />
         </Wrapper>
         <Wrapper>
-          <Heading1>모시는 글</Heading1>
+          <Heading1>소중한 분들을 초대합니다</Heading1>
           <Invitation />
-        </Wrapper>
-        <Wrapper>
-          <WeddingCalendar />
         </Wrapper>
         <Wrapper ref={galleryRef}>
           <Heading1>Gallery</Heading1>
           <GalleryWrap />
+        </Wrapper>
+        <Wrapper>
+          <WeddingCalendar />
         </Wrapper>
         <Wrapper>
           <Location />
